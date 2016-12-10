@@ -42,13 +42,11 @@ ROSIDL_GENERATOR_C_PUBLIC
 const rosidl_service_type_support_t * get_service_typesupport_handle_function(
   const rosidl_service_type_support_t * handle, const char * identifier);
 
-/* This macro is used to create the symbol of the get_service_type_support
- * function for a specific service type. The library of the message package
- * which defines a given service will provide the symbol to which this macro
- * expands.
- */
-#define ROSIDL_GET_SERVICE_TYPE_SUPPORT(SrvPkgName, SrvName) \
-  rosidl_get_service_type_support__ ## SrvPkgName ## __ ## SrvName()
+#define ROSIDL_GET_SRV_TYPE_SUPPORT(PkgName, SrvName) \
+  ROSIDL_GET_SRV_TYPE_SUPPORT_FUNCTION(PkgName, SrvName)()
+
+#define ROSIDL_GET_SRV_TYPE_SUPPORT_FUNCTION(PkgName, SrvName) \
+  ROSIDL_TYPESUPPORT_INTERFACE__SERVICE_SYMBOL_NAME(rosidl_typesupport_c, PkgName, SrvName)
 
 #ifdef __cplusplus
 }
